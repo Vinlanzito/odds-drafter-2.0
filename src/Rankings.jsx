@@ -314,7 +314,7 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
               {player.rank}
               {selectedPlayer === player.name && <button onClick={handleDraft} className="draft-button">{player.drafted ? "Undraft" : "Draft"}</button>}
             </td>
-            <td><div className="player-line"><img src={`src/assets/images/${getImageName(player.name)}.png?v=2`} alt="" /><span>{player.name}</span> ({player.team}) &#x2022; {player.position}</div></td>
+            <td><div className="player-line"><img src={`${import.meta.env.BASE_URL}images/${getImageName(player.name)}.png?v=2`} alt="" /><span>{player.name}</span> ({player.team}) &#x2022; {player.position}</div></td>
             <td>{player.value}</td>
             <td>{player.tier}</td>
             <td>{player.adp}</td>
