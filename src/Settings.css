@@ -1,0 +1,174 @@
+#settings-container {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+#replacement-container {
+    width: 22.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    min-width: 250px;
+}
+
+.settings-header {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+#replacement-level-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.replacement-level-position {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 115px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.replacement-level-position input {
+    padding: 6px 8px;
+    border-radius: 3px;
+    font-size: 18px;
+    border: solid 2px #000000;
+    font-family: 'Oswald', 'Arial';
+    width: 50px;
+}
+
+.replacement-level-position label {
+    font-size: 20px;
+    font-family: 'Oswald', 'Arial';
+}
+
+.update-button {
+    margin-top: 20px;
+    padding: 5px 20px;
+    border-radius: 3px;
+    font-size: 22px;
+    transition: 0.2s;
+    border: none;
+    background-color: #00dbf5;
+    font-family: 'Oswald', 'Arial';
+}
+
+.update-button:hover {
+    background-color: #00b4c8;
+    cursor: pointer;
+}
+
+.update-button:active {
+    transition: 0s;
+    opacity: 0.8;
+}
+
+#replacement-warning {
+    margin: 0;
+    color: #d0342c;
+    font-size: 16px;
+    font-family: 'Oswald', 'Arial';
+}
+
+#adp-container {
+    width: 22.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    min-width: 250px;
+}
+
+#adp-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#adp-form label {
+    font-size: 20px;
+    font-family: 'Oswald', 'Arial';
+    margin-bottom: 10px;
+}
+
+#tier-container {
+    width: 22.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+}
+
+#tier-value-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tier-values {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 130px;
+    margin-bottom: 15px;
+}
+
+.tier-values input {
+    padding: 6px 8px;
+    border-radius: 3px;
+    font-size: 18px;
+    border: solid 2px #000000;
+    font-family: 'Oswald', 'Arial';
+    width: 50px;
+}
+
+.tier-values label {
+    font-size: 20px;
+    font-family: 'Oswald', 'Arial';
+}
+
+#points-container {
+    width: 22.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    min-width: 245px;
+}
+
+#point-value-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.point-values {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 230px;
+    margin-bottom: 5px;
+}
+
+.point-values input {
+    padding: 6px 8px;
+    border-radius: 3px;
+    font-size: 18px;
+    border: solid 2px #000000;
+    font-family: 'Oswald', 'Arial';
+    width: 50px;
+}
+
+.point-values label {
+    font-size: 20px;
+    font-family: 'Oswald', 'Arial';
+}
