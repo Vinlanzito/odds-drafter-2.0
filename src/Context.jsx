@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import Papa from "papaparse";
 
 const AppContext = createContext(null);
 
@@ -31,7 +32,7 @@ const AppProvider = ({ children }) => {
         tier7: -1
     });
     const [adpSetting, setAdpSetting] = useState('average');
-    const [allPlayers, setAllPlayers] = useState([
+    /*const [allPlayers, setAllPlayers] = useState([
     {
         rank: 0,
         name: "Ja'Marr Chase",
@@ -4498,10 +4499,25 @@ const AppProvider = ({ children }) => {
         nflAdp: 137,
         ffCheatsheetAdp: 139
     }
-    ]);
+    ]);*/
+    const [data, setData] = useState([])
+    const [allPlayers, setAllPlayers] = useState([])
+
+    useEffect(() => {
+        fetch(`${import.meta.env.BASE_URL}players.csv`)
+            .then((response) => response.text())
+            .then((csv) => {
+                const results = Papa.parse(csv, {
+                header: true,
+                dynamicTyping: true,
+                });
+                
+                setData(results.data)
+            });
+    }, []);
 
     return (
-        <AppContext.Provider value={{ pointValues, setPointValues, allPlayers, setAllPlayers, repLevels, setRepLevels, tiers, setTiers, adpSetting, setAdpSetting }}>
+        <AppContext.Provider value={{ pointValues, setPointValues, allPlayers, setAllPlayers, repLevels, setRepLevels, tiers, setTiers, adpSetting, setAdpSetting, data }}>
             {children}
         </AppContext.Provider>
     );

@@ -69,11 +69,14 @@ function TableFilters({allPlayers, setAllPlayers, currentPlayers, setCurrentPlay
 }
 
 function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPlayers, hideDraftedPlayers, currentFilter}) {
-  const { pointValues, repLevels, tiers } = useContext(AppContext);
+  const { pointValues, repLevels, tiers, data } = useContext(AppContext);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   useEffect(() => {
-    let updatedAllPlayers = allPlayers.map(player => ({...player}));
+    if (data.length === 0) {
+      return;
+    }
+    let updatedAllPlayers = allPlayers.length === 0 ? data.map(player => ({...player})) : allPlayers.map(player => ({...player}));
     updateFantasyScores(updatedAllPlayers);
     sortByPoints(updatedAllPlayers);
     updateValues(updatedAllPlayers);
@@ -84,22 +87,24 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
     updateBye(updatedAllPlayers);
 
     setAllPlayers(updatedAllPlayers);
-  }, [pointValues, repLevels, tiers]);
+    setCurrentPlayers(updatedAllPlayers.map(player => ({...player})));
+  }, [data, pointValues, repLevels, tiers]);
 
   useEffect(() => {
     let updatedCurrentPlayers = currentPlayers.map(player => ({...player}));
     updatedCurrentPlayers = updatedCurrentPlayers.map(player => allPlayers.find(p => p.name === player.name));
     sortByValue(updatedCurrentPlayers);
-
     setCurrentPlayers(updatedCurrentPlayers);
-  }, [allPlayers]);
+  }, [allPlayers]); 
 
   const getImageName = (inputString) => inputString.replace(/[^a-zA-Z0-9\s\-]/g, "").replaceAll(" ", "-").toLowerCase();
 
-  const updateFantasyScores = (players) => players.forEach(player => player.fantasyScore = player.passingYards*pointValues.passingYardValue + 
+  const updateFantasyScores = (players) => players.forEach(player =>
+    player.fantasyScore = player.passingYards*pointValues.passingYardValue + 
       player.passingTouchdowns*pointValues.passingTouchdownValue + player.interceptions*pointValues.interceptionValue + 
       player.sacks*pointValues.sackValue + player.rushingYards*pointValues.rushingYardValue + player.receivingYards*pointValues.receivingYardValue + 
-      player.touchdowns*pointValues.touchdownValue + player.receptions*pointValues.receptionValue + player.fumbles*pointValues.fumbleValue );
+      player.rushingTouchdowns*pointValues.touchdownValue + player.receivingTouchdowns*pointValues.touchdownValue + player.receptions*pointValues.receptionValue + player.fumbles*pointValues.fumbleValue
+    );
 
   const sortByPoints = (players) => players.sort((a,b) => b.fantasyScore-a.fantasyScore);
 
@@ -302,7 +307,6 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
                 <th>Tier</th>
                 <th onClick={()=>setCurrentPlayers(sortByADP([...currentPlayers]))} className="sortable-header">ADP</th>
                 <th>Bye</th>
-                <th>Injury</th>
                 <th onClick={()=>setCurrentPlayers(sortByScarcity([...currentPlayers]))} className="sortable-header">Scarcity</th>
             </tr>
         </thead>
@@ -319,7 +323,6 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
             <td>{player.tier}</td>
             <td>{player.adp}</td>
             <td>{player.bye}</td>
-            <td>{player.injury}</td>
             <td style={{backgroundColor: getScarcityColor(player.scarcity)}}>{player.scarcity}</td>
           </tr>))}
         </tbody>
