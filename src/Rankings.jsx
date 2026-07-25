@@ -294,7 +294,6 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
       setCurrentPlayers(updatedAllPlayers.filter((player) => !player.drafted).slice(0, 10))
     };
   };
-  
 
   return (
     <div>
