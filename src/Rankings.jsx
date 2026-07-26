@@ -7,13 +7,66 @@ function RankingsBody({ currentBody }) {
   const [currentPlayers, setCurrentPlayers] = useState([...allPlayers]);
   const [hideDraftedPlayers, setHideDraftedPlayers] = useState(false);
   const [currentFilter, setCurrentFilter] = useState("all");
+  const [scarcity, setScarcity] = useState({
+    qbScarcity: 100,
+    rbScarcity: 100,
+    wrScarcity: 100,
+    teScarcity: 100
+  });
 
   return (
     <div className={`${currentBody === 'rankings' ? "" : "hide"}`}>
+      <ScarcityCounts scarcity={scarcity} />
       <TableFilters allPlayers={allPlayers} setAllPlayers={setAllPlayers} currentPlayers={currentPlayers} setCurrentPlayers={setCurrentPlayers} hideDraftedPlayers={hideDraftedPlayers} setHideDraftedPlayers={setHideDraftedPlayers} currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} />
-      <RankingsTable allPlayers={allPlayers} setAllPlayers={setAllPlayers} currentPlayers={currentPlayers} setCurrentPlayers={setCurrentPlayers} hideDraftedPlayers={hideDraftedPlayers} currentFilter={currentFilter} />
+      <RankingsTable allPlayers={allPlayers} setAllPlayers={setAllPlayers} currentPlayers={currentPlayers} setCurrentPlayers={setCurrentPlayers} hideDraftedPlayers={hideDraftedPlayers} currentFilter={currentFilter} setScarcity={setScarcity} />
     </div>
   );
+}
+
+function ScarcityCounts({scarcity}) {
+
+  const getScarcityColor = (scarcity) => {
+    let ratio = scarcity / 100;
+    let redValue;
+    let greenValue;
+    let blueValue;
+
+    if (ratio > 0.5) {
+        ratio = (ratio - 0.5)*2;
+        redValue = Math.round(255 - 255*ratio);
+        greenValue = Math.round(235 - 113*ratio);
+        blueValue = Math.round(59 - 8*ratio);
+    } else {
+        ratio *= 2;
+        redValue = Math.round(200 + 55*ratio);
+        greenValue = Math.round(16 + 219*ratio);
+        blueValue = Math.round(46 + 13*ratio);
+    }
+
+    return `rgb(${redValue},${greenValue},${blueValue})`;
+  }
+
+  return (
+    <div id="scarcity-counts">
+      <p id="scarcity-label">Scarcity</p>
+      <div className="scarcity-section">
+        <p className="scarcity-position">QB</p>
+        <p className="scarcity-percent" style={{backgroundColor: getScarcityColor(scarcity.qbScarcity)}}>{scarcity.qbScarcity}%</p>
+      </div>
+      <div className="scarcity-section">
+        <p className="scarcity-position">RB</p>
+        <p className="scarcity-percent" style={{backgroundColor: getScarcityColor(scarcity.rbScarcity)}}>{scarcity.rbScarcity}%</p>
+      </div>
+      <div className="scarcity-section">
+        <p className="scarcity-position">WR</p>
+        <p className="scarcity-percent" style={{backgroundColor: getScarcityColor(scarcity.wrScarcity)}}>{scarcity.wrScarcity}%</p>
+      </div>
+      <div className="scarcity-section">
+        <p className="scarcity-position">TE</p>
+        <p className="scarcity-percent" style={{backgroundColor: getScarcityColor(scarcity.teScarcity)}}>{scarcity.teScarcity}%</p>
+      </div>
+    </div>
+  )
 }
 
 function TableFilters({allPlayers, setAllPlayers, currentPlayers, setCurrentPlayers, hideDraftedPlayers, setHideDraftedPlayers, currentFilter, setCurrentFilter}) {
@@ -68,7 +121,7 @@ function TableFilters({allPlayers, setAllPlayers, currentPlayers, setCurrentPlay
   );
 }
 
-function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPlayers, hideDraftedPlayers, currentFilter}) {
+function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPlayers, hideDraftedPlayers, currentFilter, setScarcity}) {
   const { pointValues, repLevels, tiers, data } = useContext(AppContext);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
@@ -233,11 +286,17 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
   const updatePositionScarcity = (position, players) => {
     let positionalList = players.filter((player) => position === player.position);
     let totalValue = 0;
+    let undraftedValue = 0;
     let i = 0;
     while (positionalList[i].value > 0) {
-        totalValue += positionalList[i].value;
-        i++;
+      if (!positionalList[i].drafted) {
+        undraftedValue += positionalList[i].value;
+      }
+      totalValue += positionalList[i].value;
+      i++;
     }
+
+    updateTotalValue(position, totalValue, undraftedValue);
 
     let remainingValue = totalValue;
     i = 0;
@@ -252,6 +311,23 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
         i++;
     }
   };
+
+  const updateTotalValue = (position, totalValue, undraftedValue) => {
+    switch (position) {
+        case "QB":
+          setScarcity(prev => ({...prev, qbTotalValue: totalValue, qbRemValue: undraftedValue, qbScarcity: Math.round(undraftedValue/totalValue*100)}));
+          break;
+        case "RB":
+            setScarcity(prev => ({...prev, rbTotalValue: totalValue, rbRemValue: undraftedValue, rbScarcity: Math.round(undraftedValue/totalValue*100)}));
+            break;
+        case "WR":
+            setScarcity(prev => ({...prev, wrTotalValue: totalValue, wrRemValue: undraftedValue, wrScarcity: Math.round(undraftedValue/totalValue*100)}));
+            break;
+        case "TE":
+            setScarcity(prev => ({...prev, teTotalValue: totalValue, teRemValue: undraftedValue, teScarcity: Math.round(undraftedValue/totalValue*100)}));
+            break;
+    }
+  }
 
   const updateRank = (players) => {
     for(let i=0; i<players.length; i++) {
@@ -289,11 +365,36 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
   const handleDraft = () => {
     let updatedAllPlayers = [...allPlayers];
     updatedAllPlayers = updatedAllPlayers.map(player => selectedPlayer === player.name ? {...player, drafted: !player.drafted} : player);
+    updateRemValue();
     setAllPlayers(updatedAllPlayers);
     if (currentFilter === "topTen") {
       setCurrentPlayers(updatedAllPlayers.filter((player) => !player.drafted).slice(0, 10))
     };
   };
+
+  const updateRemValue = () => {
+    const draftPlayer = allPlayers.find(p => p.name === selectedPlayer);
+    if (draftPlayer.value < 0) {
+      return;
+    }
+    const position = draftPlayer.position;
+    const value = draftPlayer.drafted ? draftPlayer.value : -draftPlayer.value;
+
+    switch (position) {
+        case "QB":
+          setScarcity(prev => ({...prev, qbRemValue: prev.qbRemValue + value, qbScarcity: Math.round((prev.qbRemValue + value)/prev.qbTotalValue*100)}));
+          break;
+        case "RB":
+          setScarcity(prev => ({...prev, rbRemValue: prev.rbRemValue + value, rbScarcity: Math.round((prev.rbRemValue + value)/prev.rbTotalValue*100)}));
+            break;
+        case "WR":
+          setScarcity(prev => ({...prev, wrRemValue: prev.wrRemValue + value, wrScarcity: Math.round((prev.wrRemValue + value)/prev.wrTotalValue*100)}));
+            break;
+        case "TE":
+          setScarcity(prev => ({...prev, teRemValue: prev.teRemValue + value, teScarcity: Math.round((prev.teRemValue + value)/prev.teTotalValue*100)}));
+            break;
+    }
+  }
 
   return (
     <div>
@@ -306,7 +407,6 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
                 <th>Tier</th>
                 <th onClick={()=>setCurrentPlayers(sortByADP([...currentPlayers]))} className="sortable-header">ADP</th>
                 <th>Bye</th>
-                <th onClick={()=>setCurrentPlayers(sortByScarcity([...currentPlayers]))} className="sortable-header">Scarcity</th>
             </tr>
         </thead>
         <tbody>
@@ -322,7 +422,6 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
             <td>{player.tier}</td>
             <td>{player.adp}</td>
             <td>{player.bye}</td>
-            <td style={{backgroundColor: getScarcityColor(player.scarcity)}}>{player.scarcity}</td>
           </tr>))}
         </tbody>
       </table>
