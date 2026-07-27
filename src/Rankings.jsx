@@ -26,24 +26,11 @@ function RankingsBody({ currentBody }) {
 function ScarcityCounts({scarcity}) {
 
   const getScarcityColor = (scarcity) => {
-    let ratio = scarcity / 100;
-    let redValue;
-    let greenValue;
-    let blueValue;
+    const p = parseFloat(scarcity) / 100;
 
-    if (ratio > 0.5) {
-        ratio = (ratio - 0.5)*2;
-        redValue = Math.round(255 - 255*ratio);
-        greenValue = Math.round(235 - 113*ratio);
-        blueValue = Math.round(59 - 8*ratio);
-    } else {
-        ratio *= 2;
-        redValue = Math.round(200 + 55*ratio);
-        greenValue = Math.round(16 + 219*ratio);
-        blueValue = Math.round(46 + 13*ratio);
-    }
-
-    return `rgb(${redValue},${greenValue},${blueValue})`;
+    const hue = p * 120;
+    const lightness = 42 + p * 18;
+    return `hsl(${hue}, 75%, ${lightness}%)`;
   }
 
   return (
@@ -276,7 +263,7 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
             player.bye = 14;
             break;
   }});
-
+  console.log('bruh')
   const updateScarcity = (players) => {
     updatePositionScarcity("QB", players);
     updatePositionScarcity("WR", players);
