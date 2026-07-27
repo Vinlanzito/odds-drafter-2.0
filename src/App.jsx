@@ -20,13 +20,16 @@ function App() {
 function Header({currentBody, setCurrentBody}) {
   return (
     <div id="header">
-        <img onClick={() => setCurrentBody('home')} src="images/odds-logo.svg?v=2" id="logo" />
-        <button onClick={() => setCurrentBody('rankings')}>Rankings</button>
-        <button onClick={() => setCurrentBody('settings')}>Settings</button>
-        <button onClick={() => setCurrentBody('spreadsheets')}>Spreadsheets</button>
-        <button onClick={() => setCurrentBody('methodology')}>Methodology</button>
-        <button onClick={() => setCurrentBody('howToUse')}>How to Use</button>
-        <button onClick={() => setCurrentBody('changelog')}>Changelog</button>
+        <img onClick={() => setCurrentBody('home')} src="images/odds-logo.svg?v=2" id="logo" className={`${currentBody === 'home' ? "active-body" : ""}`} />
+        <h2>Odds Drafter</h2>
+        <div id="subheader">
+          <button onClick={() => setCurrentBody('rankings')} className={`${currentBody === 'rankings' ? "active-body" : ""}`}>Rankings</button>
+          <button onClick={() => setCurrentBody('methodology')} className={`${currentBody === 'methodology' ? "active-body" : ""}`}>Methodology</button>
+          <button onClick={() => setCurrentBody('howToUse')} className={`${currentBody === 'howToUse' ? "active-body" : ""}`}>How it Works</button>
+          <button onClick={() => setCurrentBody('spreadsheets')} className={`${currentBody === 'spreadsheets' ? "active-body" : ""}`}>Downloads</button>
+          <button onClick={() => setCurrentBody('changelog')} className={`${currentBody === 'changelog' ? "active-body" : ""}`}>Changelog</button>
+          <button onClick={() => setCurrentBody('settings')} className={`${currentBody === 'settings' ? "active-body" : ""}`}>Settings</button>
+        </div>
     </div>
   );
 }

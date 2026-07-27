@@ -4,13 +4,16 @@
     left: 0;
     right: 0;
     background-color: #1EA7FD;
+    color: #1C2A44;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     z-index: 100;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-#header button {
-    padding: 24px 24px;
+button {
+    padding: 26px 24px;
     border-radius: 3px;
     margin-top: 0;
     margin-bottom: 0;
@@ -22,17 +25,27 @@
     font-family: 'Oswald', 'Arial';
 }
 
-#header button:hover {
-    background-color: #00aad2;
+button:hover {
+    background-color: #1B96E4;
     cursor: pointer;
 }
 
 #logo {
     width: 60px;
-    padding: 8px;
+    padding: 11px;
+    transition: 0.25s;
 }
 
 #logo:hover {
-    background-color: #00aad2;
+    background-color: #1B96E4;
     cursor: pointer;
+}
+
+h2 {
+    font-size: 30px;
+    margin: 0;
+}
+
+.active-body {
+    background-color: #1886CA;
 }
