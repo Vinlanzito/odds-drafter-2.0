@@ -67,12 +67,13 @@ tr:hover {
 
 #table-filters button {
     font-family: 'Oswald', 'Arial';
-    background-color: #ffffff;
-    border: none;
     font-size: 16px;
     border-radius: 40px;
     padding: 4px 16px;
     transition: 0.15s;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    margin: 0 2px;
 }
 
 #table-filters button:hover {
@@ -81,8 +82,12 @@ tr:hover {
 }
 
 #table-filters .current-position {
-    font-weight: 800;
-    color: #1a1a40;
+    color: #1C2A44;
+    background-color: #1EA7FD;
+}
+
+#table-filters .current-position:hover {
+    background-color: #1EA7FD;
 }
 
 .sortable-header:hover {
