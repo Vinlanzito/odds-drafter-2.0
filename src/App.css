@@ -6,11 +6,11 @@
     background-color: #00d1ff;
     display: flex;
     z-index: 100;
-    border-bottom: 1px ridge #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 #header button {
-    padding: 15px 20px;
+    padding: 20px 20px;
     border-radius: 3px;
     margin-top: 0;
     margin-bottom: 0;
@@ -22,6 +22,16 @@
 }
 
 #header button:hover {
+    background-color: #00aad2;
+    cursor: pointer;
+}
+
+#logo {
+    width: 60px;
+    padding: 5px;
+}
+
+#logo:hover {
     background-color: #00aad2;
     cursor: pointer;
 }

@@ -20,6 +20,7 @@ function App() {
 function Header({currentBody, setCurrentBody}) {
   return (
     <div id="header">
+        <img onClick={() => setCurrentBody('rankings')} src="images/odds-logo.svg?v=2" id="logo" />
         <button onClick={() => setCurrentBody('rankings')}>Rankings</button>
         <button onClick={() => setCurrentBody('settings')}>Settings</button>
         <button onClick={() => setCurrentBody('spreadsheets')}>Spreadsheets</button>
