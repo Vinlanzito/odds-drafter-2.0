@@ -1,6 +1,6 @@
 #settings-container {
-    margin-top: 50px;
-    margin-bottom: 100px;
+    margin-top: 56px;
+    margin-bottom: 104px;
     display: flex;
     justify-content: center;
 }
@@ -16,7 +16,8 @@
 
 .settings-header {
     font-size: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
+    color: #1C2A44;
 }
 
 #replacement-level-inputs {
@@ -31,12 +32,12 @@
     align-items: center;
     justify-content: space-between;
     width: 115px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 .replacement-level-position input {
-    padding: 6px 8px;
+    padding: 4px 8px;
     border-radius: 3px;
     font-size: 18px;
     border: solid 2px #000000;
@@ -50,8 +51,8 @@
 }
 
 .update-button {
-    margin-top: 20px;
-    padding: 5px 20px;
+    margin-top: 16px;
+    padding: 4px 24px;
     border-radius: 3px;
     font-size: 22px;
     transition: 0.2s;
@@ -87,7 +88,7 @@
 }
 
 #adp-form {
-    margin-top: 10px;
+    margin-top: 8px;
     display: flex;
     flex-direction: column;
 }
@@ -95,7 +96,7 @@
 #adp-form label {
     font-size: 20px;
     font-family: 'Oswald', 'Arial';
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 #tier-container {
@@ -118,11 +119,11 @@
     align-items: center;
     justify-content: space-between;
     width: 130px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .tier-values input {
-    padding: 6px 8px;
+    padding: 4px 8px;
     border-radius: 3px;
     font-size: 18px;
     border: solid 2px #000000;
@@ -156,11 +157,11 @@
     align-items: center;
     justify-content: space-between;
     width: 230px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .point-values input {
-    padding: 6px 8px;
+    padding: 4px 8px;
     border-radius: 3px;
     font-size: 18px;
     border: solid 2px #000000;

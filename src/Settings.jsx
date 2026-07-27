@@ -64,26 +64,6 @@ function ADPSettings() {
 
   const handleAdpUpdate = () => {
     setAdpSetting(newAdpSetting);
-    /*switch (newAdpSetting) {
-        case "average":
-          setAllPlayers(allPlayers.map(player => ({...player, adp: player.averageAdp})));
-          break;
-        case "sleeper":
-          setAllPlayers(allPlayers.map(player => ({...player, adp: player.sleeperAdp})));
-          break;
-        case "espn":
-          setAllPlayers(allPlayers.map(player => ({...player, adp: player.espnAdp})));
-          break;
-        case "yahoo":
-          setAllPlayers(allPlayers.map(player => ({...player, adp: player.yahooAdp})));
-          break;
-        case "nfl":
-          setAllPlayers(allPlayers.map(player => ({...player, adp: player.nflAdp})));
-          break;
-        case "ffCheatsheet":
-          setAllPlayers(allPlayers.map(player => ({...player, adp: player.ffCheatsheetAdp})));
-          break;
-    }*/
   }
 
   return (

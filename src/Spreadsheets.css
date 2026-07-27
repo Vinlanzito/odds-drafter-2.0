@@ -1,11 +1,11 @@
 .download-header {
     font-size: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .download-button {
-    margin-top: 20px;
-    padding: 5px 20px;
+    margin-top: 24px;
+    padding: 4px 24px;
     border-radius: 3px;
     font-size: 22px;
     transition: 0.2s;
@@ -25,7 +25,7 @@
 }
 
 #spreadsheets-container {
-    margin-top: 50px;
+    margin-top: 48px;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -3,21 +3,22 @@
     top: 0;
     left: 0;
     right: 0;
-    background-color: #00d1ff;
+    background-color: #1EA7FD;
     display: flex;
     z-index: 100;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 #header button {
-    padding: 20px 20px;
+    padding: 24px 24px;
     border-radius: 3px;
     margin-top: 0;
     margin-bottom: 0;
     font-size: 20px;
     transition: 0.25s;
     border: none;
-    background-color: #00d1ff;
+    background-color: #1EA7FD;
+    color: #1C2A44;
     font-family: 'Oswald', 'Arial';
 }
 
@@ -28,7 +29,7 @@
 
 #logo {
     width: 60px;
-    padding: 5px;
+    padding: 8px;
 }
 
 #logo:hover {

@@ -1,7 +1,7 @@
 table {
     border-collapse: collapse;
     width: 60%;
-    margin: 0px auto 100px auto;
+    margin: 0px auto 104px auto;
     min-width: 500px;
 }
 th, td {
@@ -9,6 +9,7 @@ th, td {
     padding: 2px;
     text-align: center;
     position: relative;
+    
 }
 th {
     background-color: #f4f4f4;
@@ -31,7 +32,7 @@ tr:hover {
     display: flex;
     align-items: center;
     justify-content: left;
-    margin-left: 5px;
+    margin-left: 4px;
 }
 
 .player-line img {
@@ -40,7 +41,7 @@ tr:hover {
     object-fit: cover;
     background-color: #dddddd;
     border-radius: 25px;
-    margin-right: 5px;
+    margin-right: 4px;
 }
 
 .even-tier .player-line img {
@@ -54,8 +55,8 @@ tr:hover {
 
 #table-filters {
     display: flex;
-    margin-top: 10px;
-    margin-bottom: 12px;
+    margin-top: 8px;
+    margin-bottom: 8px;
     align-items: center;
     justify-content: left;
     width: 60%;
@@ -70,7 +71,7 @@ tr:hover {
     border: none;
     font-size: 16px;
     border-radius: 40px;
-    padding: 4px 15px;
+    padding: 4px 16px;
     transition: 0.15s;
 }
 
@@ -102,7 +103,7 @@ tr:hover {
     left: -60px;
     top: 2px;
     bottom: 2px;
-    padding: 0px 10px;
+    padding: 0px 8px;
     border-radius: 3px;
     font-size: 16px;
     transition: 0.15s;
@@ -131,7 +132,7 @@ tr:hover {
     position: relative;
     width: 38px;
     height: 20px;
-    margin-left: 15px;
+    margin-left: 16px;
 }
 
 .switch input {
@@ -165,7 +166,7 @@ tr:hover {
 }
 
 input:checked + .slider {
-    background-color: #323278;
+    background-color: #1EA7FD;
 }
 
 input:checked + .slider:before {
@@ -175,18 +176,18 @@ input:checked + .slider:before {
 #hide-drafted {
     font-family: 'Oswald', 'Arial';
     font-size: 16px;
-    margin-left: 6px;
+    margin-left: 4px;
 }
 
 #draft-mode {
     font-family: 'Oswald', 'Arial';
     font-size: 16px;
-    margin-left: 6px;
+    margin-left: 4px;
 }
 
 #scarcity-counts {
     display: flex;
-    margin-top: 110px;
+    margin-top: 112px;
     margin-bottom: 0px;
     align-items: center;
     justify-content: left;
@@ -197,7 +198,7 @@ input:checked + .slider:before {
 }
 
 #scarcity-label {
-    padding: 0px 10px;
+    padding: 0px 8px;
     font-size: 20px;
     font-weight: bold;
     margin: 0;
@@ -209,7 +210,7 @@ input:checked + .slider:before {
     align-items: center;
     justify-content: left;
     position: relative;
-    margin-right: 5px;
+    margin-right: 4px;
 }
 
 .scarcity-position {
@@ -224,5 +225,5 @@ input:checked + .slider:before {
     margin: 0px;
     border: 2px solid black;
     border-radius: 3px;
-    padding: 5px 20px;
+    padding: 4px 16px;
 }
