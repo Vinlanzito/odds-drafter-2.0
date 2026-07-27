@@ -33,24 +33,38 @@ function ScarcityCounts({scarcity}) {
     return `hsl(${hue}, 75%, ${lightness}%)`;
   }
 
+  console.log(scarcity.qbScarcity)
+
   return (
     <div id="scarcity-counts">
       <p id="scarcity-label">Scarcity</p>
       <div className="scarcity-section">
         <p className="scarcity-position">QB</p>
-        <p className="scarcity-percent" style={{backgroundColor: getScarcityColor(scarcity.qbScarcity)}}>{scarcity.qbScarcity}%</p>
+        <div className='scarcity-bar-container'>
+          <div className='scarcity-bar' style={{width: scarcity.qbScarcity+"%", backgroundColor: getScarcityColor(scarcity.qbScarcity)}}></div>
+        </div>
+        <p className="scarcity-percent">{scarcity.qbScarcity}%</p>
       </div>
       <div className="scarcity-section">
         <p className="scarcity-position">RB</p>
-        <p className="scarcity-percent" style={{backgroundColor: getScarcityColor(scarcity.rbScarcity)}}>{scarcity.rbScarcity}%</p>
+        <div className='scarcity-bar-container'>
+          <div className='scarcity-bar' style={{width: scarcity.rbScarcity+"%", backgroundColor: getScarcityColor(scarcity.rbScarcity)}}></div>
+        </div>
+        <p className="scarcity-percent">{scarcity.rbScarcity}%</p>
       </div>
       <div className="scarcity-section">
         <p className="scarcity-position">WR</p>
-        <p className="scarcity-percent" style={{backgroundColor: getScarcityColor(scarcity.wrScarcity)}}>{scarcity.wrScarcity}%</p>
+        <div className='scarcity-bar-container'>
+          <div className='scarcity-bar' style={{width: scarcity.wrScarcity+"%", backgroundColor: getScarcityColor(scarcity.wrScarcity)}}></div>
+        </div>
+        <p className="scarcity-percent">{scarcity.wrScarcity}%</p>
       </div>
       <div className="scarcity-section">
         <p className="scarcity-position">TE</p>
-        <p className="scarcity-percent" style={{backgroundColor: getScarcityColor(scarcity.teScarcity)}}>{scarcity.teScarcity}%</p>
+        <div className='scarcity-bar-container'>
+          <div className='scarcity-bar' style={{width: scarcity.teScarcity+"%", backgroundColor: getScarcityColor(scarcity.teScarcity)}}></div>
+        </div>
+        <p className="scarcity-percent">{scarcity.teScarcity}%</p>
       </div>
     </div>
   )
@@ -263,7 +277,7 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
             player.bye = 14;
             break;
   }});
-  console.log('bruh')
+
   const updateScarcity = (players) => {
     updatePositionScarcity("QB", players);
     updatePositionScarcity("WR", players);

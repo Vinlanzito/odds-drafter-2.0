@@ -205,25 +205,34 @@ input:checked + .slider:before {
 }
 
 .scarcity-section {
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: left;
-    position: relative;
-    margin-right: 4px;
+    width: 100px;
+    margin: 0 4px;
 }
 
 .scarcity-position {
-    position: absolute;
-    font-size: 16px;
-    margin: 0px;
-    top: -23px;
+    margin: 0;
+    padding: 4px 0;
 }
 
 .scarcity-percent {
-    font-size: 16px;
-    margin: 0px;
-    border: 2px solid black;
-    border-radius: 3px;
-    padding: 4px 16px;
+    margin: 0;
+    padding: 4px 0;
+}
+
+.scarcity-bar-container {
+    width: 80%;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.scarcity-bar {
+    height: 100%;
 }
