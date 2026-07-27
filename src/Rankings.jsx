@@ -122,7 +122,7 @@ function TableFilters({allPlayers, setAllPlayers, currentPlayers, setCurrentPlay
 }
 
 function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPlayers, hideDraftedPlayers, currentFilter, setScarcity}) {
-  const { pointValues, repLevels, tiers, data } = useContext(AppContext);
+  const { pointValues, repLevels, tiers, data, adpSetting } = useContext(AppContext);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   useEffect(() => {
@@ -138,10 +138,11 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
     updateScarcity(updatedAllPlayers);
     updateRank(updatedAllPlayers);
     updateBye(updatedAllPlayers);
+    updateAdp(updatedAllPlayers);
 
     setAllPlayers(updatedAllPlayers);
     setCurrentPlayers(updatedAllPlayers.map(player => ({...player})));
-  }, [data, pointValues, repLevels, tiers]);
+  }, [data, pointValues, repLevels, tiers, adpSetting]);
 
   useEffect(() => {
     let updatedCurrentPlayers = currentPlayers.map(player => ({...player}));
@@ -395,6 +396,8 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
             break;
     }
   }
+
+  const updateAdp = (players) => players.forEach(player => player.adp = player[adpSetting]);
 
   return (
     <div>

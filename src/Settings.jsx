@@ -64,7 +64,7 @@ function ADPSettings() {
 
   const handleAdpUpdate = () => {
     setAdpSetting(newAdpSetting);
-    switch (newAdpSetting) {
+    /*switch (newAdpSetting) {
         case "average":
           setAllPlayers(allPlayers.map(player => ({...player, adp: player.averageAdp})));
           break;
@@ -83,7 +83,7 @@ function ADPSettings() {
         case "ffCheatsheet":
           setAllPlayers(allPlayers.map(player => ({...player, adp: player.ffCheatsheetAdp})));
           break;
-    }
+    }*/
   }
 
   return (
@@ -91,22 +91,37 @@ function ADPSettings() {
       <p className="settings-header">Average Draft Position</p>
         <form id="adp-form">
           <label>
-            <input type="radio" name="adp" value="average" checked={newAdpSetting === 'average'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Average ADP
+            <input type="radio" name="adp" value="consensusPPR" checked={newAdpSetting === 'consensusPPR'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Consensus PPR
           </label>
           <label>
-            <input type="radio" name="adp" value="sleeper" checked={newAdpSetting === 'sleeper'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Sleeper ADP
+            <input type="radio" name="adp" value="fantraxPPR" checked={newAdpSetting === 'fantraxPPR'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Fantrax PPR
           </label>
           <label>
-            <input type="radio" name="adp" value="espn" checked={newAdpSetting === 'espn'} onChange={(e) => setNewAdpSetting(e.target.value)} /> ESPN ADP
+            <input type="radio" name="adp" value="sleeperPPR" checked={newAdpSetting === 'sleeperPPR'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Sleeper PPR
           </label>
           <label>
-            <input type="radio" name="adp" value="yahoo" checked={newAdpSetting === 'yahoo'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Yahoo ADP
+            <input type="radio" name="adp" value="espnPPR" checked={newAdpSetting === 'espnPPR'} onChange={(e) => setNewAdpSetting(e.target.value)} /> ESPN PPR
           </label>
           <label>
-            <input type="radio" name="adp" value="nfl" checked={newAdpSetting === 'nfl'} onChange={(e) => setNewAdpSetting(e.target.value)} /> NFL ADP
+            <input type="radio" name="adp" value="yahooPPR" checked={newAdpSetting === 'yahooPPR'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Yahoo PPR
           </label>
           <label>
-            <input type="radio" name="adp" value="ffCheatsheet" checked={newAdpSetting === 'ffCheatsheet'} onChange={(e) => setNewAdpSetting(e.target.value)} /> FF Cheatsheet ADP
+            <input type="radio" name="adp" value="consensusHalfPPR" checked={newAdpSetting === 'consensusHalfPPR'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Consensus Half PPR
+          </label>
+          <label>
+            <input type="radio" name="adp" value="underdogHalfPPR" checked={newAdpSetting === 'underdogHalfPPR'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Underdog Half PPR
+          </label>
+          <label>
+            <input type="radio" name="adp" value="sleeperHalfPPR" checked={newAdpSetting === 'sleeperHalfPPR'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Sleeper Half PPR
+          </label>
+          <label>
+            <input type="radio" name="adp" value="consensusStandard" checked={newAdpSetting === 'consensusStandard'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Consensus Standard
+          </label>
+          <label>
+            <input type="radio" name="adp" value="fantraxStandard" checked={newAdpSetting === 'fantraxStandard'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Fantrax Standard
+          </label>
+          <label>
+            <input type="radio" name="adp" value="sleeperStandard" checked={newAdpSetting === 'sleeperStandard'} onChange={(e) => setNewAdpSetting(e.target.value)} /> Sleeper Standard
           </label>
         </form>
         <button onClick={handleAdpUpdate} className="update-button">Update</button>

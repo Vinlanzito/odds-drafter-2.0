@@ -31,7 +31,7 @@ const AppProvider = ({ children }) => {
         tier6: -0,
         tier7: -1
     });
-    const [adpSetting, setAdpSetting] = useState('average');
+    const [adpSetting, setAdpSetting] = useState('consensusPPR');
     const [data, setData] = useState([])
     const [allPlayers, setAllPlayers] = useState([])
 
