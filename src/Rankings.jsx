@@ -212,54 +212,54 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
 
   const updateBye = (players) => players.forEach((player) => {
     switch (player.team) {
-        case "CHI":
-        case "GB":
-        case "ATL":
-        case "PIT":
+        case "CAR":
+        case "KC":
             player.bye = 5;
             break;
         case "MIN":
-        case "HOU":
+        case "CIN":
+        case "DET":
+        case "MIA":
             player.bye = 6;
             break;
         case "BUF":
-        case "BAL":
+        case "JAC":
+        case "LAC":
+        case "WAS":
             player.bye = 7;
             break;
-        case "DET":
-        case "ARI":
-        case "LA":
-        case "SEA":
-        case "JAC":
-        case "LV":
+        case "NO":
+        case "HOU":
+        case "NYG":
+        case "SF":
             player.bye = 8;
             break;
-        case "PHI":
-        case "TB":
-        case "NYJ":
-        case "CLE":
+        case "PIT":
+        case "TEN":
             player.bye = 9;
             break;
-        case "DAL":
-        case "CIN":
-        case "TEN":
-        case "KC":
+        case "CHI":
+        case "DEN":
+        case "PHI":
+        case "TB":
             player.bye = 10;
             break;
-        case "NO":
-        case "IND":
+        case "LA":
+        case "GB":
+        case "ATL":
+        case "CLE":
+        case "NE":
+        case "SEA":
             player.bye = 11;
             break;
-        case "WAS":
-        case "MIA":
-        case "DEN":
-        case "LAC":
-            player.bye = 12;
+        case "BAL":
+        case "IND":
+        case "LV":
+        case "NYJ":
+            player.bye = 13;
             break;
-        case "NYG":
-        case "CAR":
-        case "SF":
-        case "NE":
+        case "ARI":
+        case "DAL":
             player.bye = 14;
             break;
   }});
