@@ -228,7 +228,7 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
             break;
         case "DET":
         case "ARI":
-        case "LAR":
+        case "LA":
         case "SEA":
         case "JAC":
         case "LV":

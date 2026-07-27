@@ -20,10 +20,13 @@ function App() {
 function Header({currentBody, setCurrentBody}) {
   return (
     <div id="header">
-        <img onClick={() => setCurrentBody('rankings')} src="images/odds-logo.svg?v=2" id="logo" />
+        <img onClick={() => setCurrentBody('home')} src="images/odds-logo.svg?v=2" id="logo" />
         <button onClick={() => setCurrentBody('rankings')}>Rankings</button>
         <button onClick={() => setCurrentBody('settings')}>Settings</button>
         <button onClick={() => setCurrentBody('spreadsheets')}>Spreadsheets</button>
+        <button onClick={() => setCurrentBody('methodology')}>Methodology</button>
+        <button onClick={() => setCurrentBody('howToUse')}>How to Use</button>
+        <button onClick={() => setCurrentBody('changelog')}>Changelog</button>
     </div>
   );
 }
