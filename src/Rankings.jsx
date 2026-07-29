@@ -33,8 +33,6 @@ function ScarcityCounts({scarcity}) {
     return `hsl(${hue}, 75%, ${lightness}%)`;
   }
 
-  console.log(scarcity.qbScarcity)
-
   return (
     <div id="scarcity-counts">
       <p id="scarcity-label">Scarcity</p>
@@ -421,11 +419,11 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
               {player.rank}
               {selectedPlayer === player.name && <button onClick={handleDraft} className="draft-button">{player.drafted ? "Undraft" : "Draft"}</button>}
             </td>
-            <td><div className="player-line"><img src={player.image} alt="" /><span>{player.name}</span> ({player.team}) &#x2022; {player.position}</div></td>
-            <td>{player.value}</td>
-            <td>{player.tier}</td>
-            <td>{player.adp}</td>
-            <td>{player.bye}</td>
+            <td><div className="player-line"><img className="player-img" src={player.image} alt="" /><div className="player-line-info"><span className="player-name">{player.name}</span><div className="player-sub"><img src={player.teamImage} alt="" /> {player.team} &#x2022; <span className={player.position.toLowerCase()}>{player.position}</span></div></div></div></td>
+            <td className="right-align">{player.value.toFixed(1)}</td>
+            <td><span className={`tier${player.tier}`}>{player.tier}</span></td>
+            <td className="right-align">{player.adp}</td>
+            <td className="right-align">{player.bye}</td>
           </tr>))}
         </tbody>
       </table>

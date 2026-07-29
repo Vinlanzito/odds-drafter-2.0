@@ -47,5 +47,17 @@ h2 {
 }
 
 .active-body {
-    background-color: #1886CA;
+    /*background-color: #1886CA;*/
+    position: relative;
 }
+
+.active-body::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px; 
+    background: #1886CA;
+}
+
