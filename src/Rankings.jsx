@@ -360,12 +360,13 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
 
   const sortByScarcity = (players) => players.sort((a,b) => b.scarcity.replace("%" ,"")-a.scarcity.replace("%" ,""));
 
-  const selectPlayer = (player) => selectedPlayer === player ? setSelectedPlayer(null) : setSelectedPlayer(player);
+  const selectPlayer = (player) => selectedPlayer?.name === player.name ? setSelectedPlayer(null) : setSelectedPlayer(player);
 
   const handleDraft = () => {
     let updatedAllPlayers = [...allPlayers];
-    updatedAllPlayers = updatedAllPlayers.map(player => selectedPlayer === player.name ? {...player, drafted: !player.drafted} : player);
+    updatedAllPlayers = updatedAllPlayers.map(player => selectedPlayer?.name === player.name ? {...player, drafted: !player.drafted} : player);
     updateRemValue();
+    setSelectedPlayer(null)
     setAllPlayers(updatedAllPlayers);
     if (currentFilter === "topTen") {
       setCurrentPlayers(updatedAllPlayers.filter((player) => !player.drafted).slice(0, 10))
@@ -373,7 +374,7 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
   };
 
   const updateRemValue = () => {
-    const draftPlayer = allPlayers.find(p => p.name === selectedPlayer);
+    const draftPlayer = allPlayers.find(p => p.name === selectedPlayer?.name);
     if (draftPlayer.value < 0) {
       return;
     }
@@ -414,10 +415,9 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
         <tbody>
           {currentPlayers.map((player) => 
           !(hideDraftedPlayers && player.drafted) && (player.fantasyScore > 0) && 
-          (<tr key={player.name} onClick={() => selectPlayer(player.name)} className={`${player.tier % 2 === 0 ? 'even-tier ' : ""}${player.drafted ? 'drafted ' : ""}${selectedPlayer === player.name ? 'clicked-row ' : ""}`}>
+          (<tr key={player.name} onClick={() => selectPlayer(player)} className={`${player.tier % 2 === 0 ? 'even-tier ' : ""}${player.drafted ? 'drafted ' : ""}${selectedPlayer?.name === player.name ? 'clicked-row ' : ""}`}>
             <td>
               {player.rank}
-              {selectedPlayer === player.name && <button onClick={handleDraft} className="draft-button">{player.drafted ? "Undraft" : "Draft"}</button>}
             </td>
             <td><div className="player-line"><img className="player-img" src={player.image} alt="" /><div className="player-line-info"><span className="player-name">{player.name}</span><div className="player-sub"><img src={player.teamImage} alt="" /> {player.team} &#x2022; <span className={player.position.toLowerCase()}>{player.position}</span></div></div></div></td>
             <td className="right-align">{player.value.toFixed(1)}</td>
@@ -427,6 +427,15 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
           </tr>))}
         </tbody>
       </table>
+      {selectedPlayer && (<div id="overlay">
+            <div id="draft-panel">
+              <h3>{selectedPlayer.drafted ? "Undraft" : "Draft"} {selectedPlayer.name}?</h3>
+              <div className="action-buttons">
+                <button className="cancel-button" onClick={() => setSelectedPlayer(null)}>Cancel</button>
+                <button className="draft-button" onClick={handleDraft}>{selectedPlayer.drafted ? "Undraft" : "Draft"}</button>
+              </div>
+            </div>
+        </div>)}
     </div>
   );
 }
