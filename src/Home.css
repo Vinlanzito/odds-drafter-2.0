@@ -1,0 +1,99 @@
+#hero {
+    margin-top: 96px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
+    padding-bottom: 8px;
+}
+
+#hero h1 {
+    margin-bottom: 0;
+}
+
+.home-button {
+    margin: 8px 0;
+    padding: 4px 24px;
+    border-radius: 3px;
+    font-size: 22px;
+    transition: 0.2s;
+    border: none;
+    background-color: #1EA7FD;
+    color: #1C2A44;
+    font-family: 'Oswald', 'Arial';
+}
+
+.home-button:hover {
+    background-color: #1B96E4;
+    cursor: pointer;
+}
+
+.home-button:active {
+    transition: 0s;
+    opacity: 0.8;
+}
+
+#hero-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.feature-cards {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
+    width: 300px;
+}
+
+.feature-card h3 {
+    margin: 8px 0;
+}
+
+.feature-card p {
+    margin: 0 8px 16px 8px;
+    text-align: center;
+}
+
+.why-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
+    margin: 8px auto;
+}
+
+.why-card h2 {
+    margin: 8px 0;
+}
+
+.why-card p {
+    margin: 0 8px 16px 8px;
+    text-align: center;
+    width: 80%;
+}
+
+footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #1EA7FD;
+    color: 1C2A44;
+    text-align: center;
+    padding: 10px;
+}

@@ -1,18 +1,27 @@
 import { useState } from 'react'
 import './App.css'
+import HomeBody from './Home.jsx'
 import RankingsBody from './Rankings.jsx'
-import SettingsBody from './Settings.jsx'
+import MethodologyBody from './Methodology.jsx'
+import HowToUseBody from './HowToUse.jsx'
 import SpreadsheetsBody from './Spreadsheets.jsx'
+import ChangelogBody from './Changelog.jsx'
+import SettingsBody from './Settings.jsx'
+
 
 function App() {
-  const [currentBody, setCurrentBody] = useState('rankings');
+  const [currentBody, setCurrentBody] = useState('home');
 
   return (
     <div>
       <Header currentBody={currentBody} setCurrentBody={setCurrentBody} />
+      {currentBody === 'home' && <HomeBody setCurrentBody={setCurrentBody} />}
       <RankingsBody currentBody={currentBody} />
-      {currentBody === 'settings' && <SettingsBody />}
+      {currentBody === 'methodology' && <MethodologyBody />}
+      {currentBody === 'howToUse' && <HowToUseBody />}
       {currentBody === 'spreadsheets' && <SpreadsheetsBody />}
+      {currentBody === 'changelog' && <ChangelogBody />}
+      {currentBody === 'settings' && <SettingsBody />}
     </div>
   );
 }
