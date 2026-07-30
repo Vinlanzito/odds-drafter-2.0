@@ -1,21 +1,26 @@
 #settings-container {
-    margin-top: 56px;
+    margin-top: 96px;
     margin-bottom: 104px;
     display: flex;
     justify-content: center;
+    gap: 8px;
 }
 
 #replacement-container {
-    width: 22.5%;
+    width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: left;
     min-width: 250px;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
 }
 
 .settings-header {
     font-size: 30px;
+    margin-top: 8px;
     margin-bottom: 16px;
     color: #1C2A44;
 }
@@ -51,7 +56,8 @@
 }
 
 .update-button {
-    margin-top: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
     padding: 4px 24px;
     border-radius: 3px;
     font-size: 22px;
@@ -63,7 +69,7 @@
 }
 
 .update-button:hover {
-    background-color: #00b4c8;
+    background-color: #1B96E4;
     cursor: pointer;
 }
 
@@ -80,12 +86,15 @@
 }
 
 #adp-container {
-    width: 22.5%;
+    width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: left;
     min-width: 250px;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
 }
 
 #adp-form {
@@ -101,11 +110,14 @@
 }
 
 #tier-container {
-    width: 22.5%;
+    width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: left;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
 }
 
 #tier-value-inputs {
@@ -138,12 +150,15 @@
 }
 
 #points-container {
-    width: 22.5%;
+    width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: left;
     min-width: 245px;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
 }
 
 #point-value-inputs {

@@ -104,9 +104,25 @@ function SpreadsheetsBody() {
 
   return (
     <div id="spreadsheets-container">
-        <p className="download-header">Excel Sheets</p>
-        <button onClick={handleExport} className="download-button">Download cheatsheet</button>
-        <button onClick={handleExportWithData} className="download-button">Download cheatsheet with stats</button>
+        <p className="download-header">Excel Downloads</p>
+        <div className="spreadsheet-card">
+            <p className="download-subheader">Download draft cheatsheet</p>
+            <ul>
+                <li>Value</li>
+                <li>Tiers</li>
+                <li>ADP</li>
+            </ul>
+            <button onClick={handleExport} className="download-button">Download</button>
+        </div>
+        <div className="spreadsheet-card">
+            <p className="download-subheader">Draft cheatsheet + projections</p>
+            <ul>
+                <li>Fantasy points</li>
+                <li>Betting lines</li>
+                <li>Projection data</li>
+            </ul>
+            <button onClick={handleExportWithData} className="download-button">Download</button>
+        </div>
     </div>
   );
 }
