@@ -104,9 +104,9 @@ function SpreadsheetsBody() {
 
   return (
     <div id="spreadsheets-container">
-        <p className="download-header">Excel Downloads</p>
+        <h2 className="download-header">Excel Downloads</h2>
         <div className="spreadsheet-card">
-            <p className="download-subheader">Download draft cheatsheet</p>
+            <h3 className="download-subheader">Download draft cheatsheet</h3>
             <ul>
                 <li>Value</li>
                 <li>Tiers</li>
@@ -115,7 +115,7 @@ function SpreadsheetsBody() {
             <button onClick={handleExport} className="download-button">Download</button>
         </div>
         <div className="spreadsheet-card">
-            <p className="download-subheader">Draft cheatsheet + projections</p>
+            <h3 className="download-subheader">Draft cheatsheet + projections</h3>
             <ul>
                 <li>Fantasy points</li>
                 <li>Betting lines</li>

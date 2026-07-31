@@ -1,0 +1,45 @@
+.how-level {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.how-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
+    width: 400px;
+}
+
+.how-card h3 {
+    margin: 8px 0;
+}
+
+.how-card p {
+    margin: 0 8px 16px 8px;
+    text-align: center;
+}
+
+.how-card2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
+    width: 300px;
+}
+
+.how-card2 h3 {
+    margin: 8px 0;
+}
+
+.how-card2 p {
+    margin: 0 8px 16px 8px;
+    text-align: center;
+}

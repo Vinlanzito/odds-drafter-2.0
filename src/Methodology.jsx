@@ -4,7 +4,7 @@ import './Methodology.css'
 function MethodologyBody() {
 
   return (
-    <div id="method-container">
+    <div>
       <div className="step-level">
         <div className='step-card'>
           <h2>Step 1</h2>

@@ -60,3 +60,8 @@ h2 {
     background: #1886CA;
 }
 
+#body-container {
+    max-width: 1300px;
+    margin: 114px auto 0 auto;
+    padding: 0 24px;
+}

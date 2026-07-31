@@ -15,13 +15,15 @@ function App() {
   return (
     <div>
       <Header currentBody={currentBody} setCurrentBody={setCurrentBody} />
-      {currentBody === 'home' && <HomeBody setCurrentBody={setCurrentBody} />}
-      <RankingsBody currentBody={currentBody} />
-      {currentBody === 'methodology' && <MethodologyBody />}
-      {currentBody === 'howToUse' && <HowToUseBody />}
-      {currentBody === 'spreadsheets' && <SpreadsheetsBody />}
-      {currentBody === 'changelog' && <ChangelogBody />}
-      {currentBody === 'settings' && <SettingsBody />}
+      <div id='body-container'>
+        {currentBody === 'home' && <HomeBody setCurrentBody={setCurrentBody} />}
+        <RankingsBody currentBody={currentBody} />
+        {currentBody === 'methodology' && <MethodologyBody />}
+        {currentBody === 'howToUse' && <HowToUseBody />}
+        {currentBody === 'spreadsheets' && <SpreadsheetsBody />}
+        {currentBody === 'changelog' && <ChangelogBody />}
+        {currentBody === 'settings' && <SettingsBody />}
+      </div>
     </div>
   );
 }

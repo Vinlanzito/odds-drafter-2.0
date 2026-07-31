@@ -1,0 +1,28 @@
+table {
+    border-collapse: collapse;
+    width: 60%;
+    margin: 0px auto 104px auto;
+    min-width: 500px;
+}
+
+td {
+    border: 1px solid #dddddd;
+    padding: 2px;
+    text-align: center;
+    position: relative;
+}
+
+th {
+    outline: 1px solid #dddddd;
+    padding: 2px;
+    text-align: center;
+    background-color: #f4f4f4;
+    font-weight: bold;
+    position: sticky;
+    z-index: 1;
+    top: 81px;
+}
+
+tr {
+    background-color: #FFFFFF;
+}
