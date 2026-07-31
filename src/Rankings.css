@@ -371,7 +371,9 @@ input:checked + .slider:before {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    justify-content: space-between;
+    width: 320px;
+    position: relative;
 }
 
 .draft-button {
@@ -410,9 +412,68 @@ input:checked + .slider:before {
 .action-buttons {
     display: flex;
     justify-content: flex-end;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
 }
 
 #draft-panel h3 {
-    margin-top: 0;
-    margin-bottom: 24px;
+    margin: 0;
+}
+
+.draft-panel-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.draft-img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    background-color: #dddddd;
+    border-radius: 50%;
+}
+
+.draft-panel-header-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.draft-stats-div {
+    display:flex;
+    gap: 8px;
+    padding: 0 8px;
+}
+
+.draft-stats-div p {
+    margin: 0;
+}
+
+.draft-panel-stats h4 {
+    margin: 8px 0 4px 0;
+}
+
+.draft-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.draft-statline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius: 12px;
+    width: 72px;
+}
+
+.draft-stats-div .draft-stat {
+    margin-top: -4px;
+    font-weight: 500;
+    font-size: 20px;
 }

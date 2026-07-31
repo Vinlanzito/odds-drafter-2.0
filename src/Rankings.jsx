@@ -398,7 +398,6 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
   }
 
   const updateAdp = (players) => players.forEach(player => player.adp = player[adpSetting]);
-
   return (
     <div>
       <table id="main-table">
@@ -429,7 +428,61 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
       </table>
       {selectedPlayer && (<div id="overlay">
             <div id="draft-panel">
-              <h3>{selectedPlayer.drafted ? "Undraft" : "Draft"} {selectedPlayer.name}?</h3>
+              <div className='draft-panel-header'>
+                <div className='draft-panel-stats'>
+                  <h3>{selectedPlayer.drafted ? "Undraft" : "Draft"} {selectedPlayer.name}?</h3>
+                  <h4>Projections</h4>
+                  <div className='draft-stats-div'>
+                    {selectedPlayer.position === "QB" ?
+                    <div className='draft-stats'>
+                      <div className='draft-statline'>
+                        <p>Pass Yds</p>
+                        <p className='draft-stat'>{selectedPlayer.passingYards.toFixed(0)}</p>
+                      </div>
+                      <div className='draft-statline'>
+                        <p>Pass TD</p>
+                        <p className='draft-stat'>{selectedPlayer.passingTouchdowns.toFixed(0)}</p>
+                      </div>
+                      <div className='draft-statline'>
+                        <p>Int</p>
+                        <p className='draft-stat'>{selectedPlayer.interceptions.toFixed(0)}</p>
+                      </div>
+                    </div>
+                    :
+                    <div className='draft-stats'>
+                      <div className='draft-statline'>
+                        <p>Rec</p>
+                        <p className='draft-stat'>{selectedPlayer.receptions.toFixed(0)}</p>
+                      </div>
+                      <div className='draft-statline'>
+                        <p>Rec Yds</p>
+                        <p className='draft-stat'>{selectedPlayer.receivingYards.toFixed(0)}</p>
+                      </div>
+                      <div className='draft-statline'>
+                        <p>Rec TD</p>
+                        <p className='draft-stat'>{selectedPlayer.receivingTouchdowns.toFixed(0)}</p>
+                      </div>
+                    </div>
+                    }
+                    <div className='draft-stats'>
+                      <div className='draft-statline'>
+                        <p>Rush Yds</p>
+                        <p className='draft-stat'>{selectedPlayer.rushingYards.toFixed(0)}</p>
+                      </div>
+                      <div className='draft-statline'>
+                        <p>Rush TD</p>
+                        <p className='draft-stat'>{selectedPlayer.rushingTouchdowns.toFixed(0)}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className='draft-panel-header-player'>
+                  <img className='draft-img' src={selectedPlayer.image} alt="" />
+                  <div className="player-sub"><img src={selectedPlayer.teamImage} alt="" /> {selectedPlayer.team} &#x2022; <span className={selectedPlayer.position.toLowerCase()}>{selectedPlayer.position}</span></div>
+                </div>
+              </div>
+              
               <div className="action-buttons">
                 <button className="cancel-button" onClick={() => setSelectedPlayer(null)}>Cancel</button>
                 <button className="draft-button" onClick={handleDraft}>{selectedPlayer.drafted ? "Undraft" : "Draft"}</button>
