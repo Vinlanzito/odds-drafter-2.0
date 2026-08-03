@@ -401,7 +401,7 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
   
   return (
     <div>
-      <table id="main-table">
+      <table className="rankings-table">
         <thead>
             <tr>
                 <th>Rank</th>

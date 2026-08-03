@@ -6,6 +6,7 @@
     border:1px solid #E5E7EB;
     border-radius:12px;
     padding-bottom: 8px;
+    margin-top: 32px;
 }
 
 #hero h1 {
@@ -44,7 +45,7 @@
     align-items: stretch;
     justify-content: center;
     gap: 8px;
-    margin-top: 8px;
+    margin: 24px 0;
 }
 
 .feature-card {
@@ -74,7 +75,7 @@
     background-color: #FFFFFF;
     border:1px solid #E5E7EB;
     border-radius:12px;
-    margin: 8px auto;
+    margin-bottom: 32px;
 }
 
 .why-card h2 {
@@ -85,14 +86,4 @@
     margin: 0 8px 16px 8px;
     text-align: center;
     width: 80%;
-}
-
-footer {
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #1EA7FD;
-    color: 1C2A44;
-    text-align: center;
-    padding: 10px;
 }

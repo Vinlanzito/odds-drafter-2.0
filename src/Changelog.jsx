@@ -5,7 +5,7 @@ function ChangelogBody() {
 
   return (
     <div>
-      <table>
+      <table className='changelog-table'>
         <thead>
             <tr>
               <th>Date</th>

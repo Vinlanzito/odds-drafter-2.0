@@ -24,6 +24,7 @@ function App() {
         {currentBody === 'changelog' && <ChangelogBody />}
         {currentBody === 'settings' && <SettingsBody />}
       </div>
+      {currentBody === 'home' && <Footer />}
     </div>
   );
 }
@@ -45,7 +46,13 @@ function Header({currentBody, setCurrentBody}) {
   );
 }
 
-
+function Footer() {
+  return (
+    <footer>
+      <p>© 2026 Odds Drafter</p>
+    </footer>
+  );
+}
 
 
 

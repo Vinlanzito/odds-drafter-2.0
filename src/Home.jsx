@@ -33,9 +33,6 @@ function HomeBody({setCurrentBody}) {
         Our rankings use value-based drafting to help users compare players across different positions. We also feature live scarcity percentages that tell how much value remains at each position.
         This powerful tool prevents users from missing out on valuable players at each position and helps create a balanced roster.</p>
       </div>
-      <footer>
-        <p>© 2026 Odds Drafter</p>
-      </footer>
     </div>
   );
 }

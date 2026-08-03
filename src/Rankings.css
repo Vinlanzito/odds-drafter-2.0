@@ -1,18 +1,18 @@
-table {
+.rankings-table {
     border-collapse: collapse;
-    width: 60%;
+    width: 90%;
     margin: 0px auto 104px auto;
     min-width: 500px;
 }
 
-td {
+.rankings-table td {
     border: 1px solid #dddddd;
     padding: 2px;
     text-align: center;
     position: relative;
 }
 
-th {
+.rankings-table th {
     outline: 1px solid #dddddd;
     padding: 2px;
     text-align: center;
@@ -23,11 +23,11 @@ th {
     top: 81px;
 }
 
-tr {
+.rankings-table tr {
     background-color: #FFFFFF;
 }
 
-tr:hover {
+.rankings-table tr:hover {
     background-color: #D2EDFF;
 }
 
@@ -64,7 +64,7 @@ tr:hover {
     margin-top: 8px;
     margin-bottom: 8px;
     align-items: center;
-    justify-content: left;
+    justify-content: center;
     width: 60%;
     min-width: 500px;
     margin-left: auto;
@@ -181,7 +181,7 @@ input:checked + .slider:before {
     display: flex;
     margin-bottom: 0px;
     align-items: center;
-    justify-content: left;
+    justify-content: center;
     width: 60%;
     min-width: 500px;
     margin-left: auto;

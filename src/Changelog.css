@@ -1,18 +1,18 @@
-table {
+.changelog-table {
     border-collapse: collapse;
     width: 60%;
     margin: 0px auto 104px auto;
     min-width: 500px;
 }
 
-td {
+.changelog-table td {
     border: 1px solid #dddddd;
     padding: 2px;
     text-align: center;
     position: relative;
 }
 
-th {
+.changelog-table th {
     outline: 1px solid #dddddd;
     padding: 2px;
     text-align: center;
@@ -23,6 +23,6 @@ th {
     top: 81px;
 }
 
-tr {
+.changelog-table tr {
     background-color: #FFFFFF;
 }
