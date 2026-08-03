@@ -398,6 +398,7 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
   }
 
   const updateAdp = (players) => players.forEach(player => player.adp = player[adpSetting]);
+  
   return (
     <div>
       <table id="main-table">
