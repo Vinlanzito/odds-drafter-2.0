@@ -406,10 +406,10 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
             <tr>
                 <th>Rank</th>
                 <th>Name</th>
-                <th onClick={()=>setCurrentPlayers(sortByValue([...currentPlayers]))} className="sortable-header">Value</th>
+                <th onClick={()=>setCurrentPlayers(sortByValue([...currentPlayers]))} className="sortable-header right-align">Value</th>
                 <th>Tier</th>
-                <th onClick={()=>setCurrentPlayers(sortByADP([...currentPlayers]))} className="sortable-header">ADP</th>
-                <th>Bye</th>
+                <th onClick={()=>setCurrentPlayers(sortByADP([...currentPlayers]))} className="sortable-header right-align">ADP</th>
+                <th className="right-align">Bye</th>
             </tr>
         </thead>
         <tbody>

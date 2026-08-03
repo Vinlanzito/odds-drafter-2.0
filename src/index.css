@@ -7,3 +7,8 @@ body {
 .hide {
     display: none;
 }
+
+td, .body-paragraph {
+   font-family: 'Inter', 'Arial';
+}
+
