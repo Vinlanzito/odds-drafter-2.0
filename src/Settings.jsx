@@ -191,10 +191,6 @@ function PointsSettings() {
             <label htmlFor="fumbles-input">Fumbles</label>
             <input type="number" id="fumbles-input" value={newPointValues.fumbleValue} onChange={(e) => setNewPointValues(prev => ({...prev, fumbleValue: e.target.value}))} />
           </div>
-          <div className="point-values">
-            <label htmlFor="sacks-input">Sacks</label>
-            <input type="number" step="0.25" id="sacks-input" value={newPointValues.sackValue} onChange={(e) => setNewPointValues(prev => ({...prev, sackValue: e.target.value}))} />
-          </div>
         </div>
         <button onClick={() => setPointValues({...newPointValues})} className="update-button">Update</button>
     </div>

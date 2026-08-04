@@ -12,6 +12,7 @@
     background-color: #1EA7FD;
     color: #1C2A44;
     font-family: 'Oswald', 'Arial';
+    margin-top: 16px;
 }
 
 .download-button:hover {
@@ -32,7 +33,7 @@
 }
 
 .spreadsheet-card {
-    width: 400px;
+    width: 500px;
     background-color: #FFFFFF;
     border:1px solid #E5E7EB;
     border-radius:12px;
@@ -49,4 +50,24 @@
 ul {
     margin: 8px 0;
     width: 60%;
+}
+
+.spreadsheet-features {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.spreadsheet-card p {
+    margin: 4px 0;
+}
+
+.icons {
+    color: #1EA7FD;
+}
+
+#spreadsheets-body {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
 }

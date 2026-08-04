@@ -4,6 +4,15 @@ import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import './Spreadsheets.css'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+
+library.add(fas, far, fab)
+
 function SpreadsheetsBody() {
     const { allPlayers } = useContext(AppContext);
 
@@ -74,7 +83,6 @@ function SpreadsheetsBody() {
                 { header: "Receiving TDs", key: "receivingTouchdowns", width: 10 },
                 { header: "Rec", key: "receptions", width: 10 },
                 { header: "Fmb", key: "fumbles", width: 5 },
-                { header: "Sk", key: "sacks", width: 5 },
             ];
 
             worksheet.addRows(allPlayers)
@@ -105,23 +113,31 @@ function SpreadsheetsBody() {
   return (
     <div id="spreadsheets-container">
         <h2 className="download-header">Excel Downloads</h2>
-        <div className="spreadsheet-card">
-            <h3 className="download-subheader">Download draft cheatsheet</h3>
-            <ul>
-                <li>Value</li>
-                <li>Tiers</li>
-                <li>ADP</li>
-            </ul>
-            <button onClick={handleExport} className="download-button">Download</button>
-        </div>
-        <div className="spreadsheet-card">
-            <h3 className="download-subheader">Draft cheatsheet + projections</h3>
-            <ul>
-                <li>Fantasy points</li>
-                <li>Betting lines</li>
-                <li>Projection data</li>
-            </ul>
-            <button onClick={handleExportWithData} className="download-button">Download</button>
+        <div id="spreadsheets-body">
+            <div className="spreadsheet-card">
+                <h3 className="download-subheader">Download draft cheatsheet</h3>
+                <div className='spreadsheet-features'>
+                    <p><strong>Includes</strong></p>
+                    <p><FontAwesomeIcon icon="fa-solid fa-check" className='icons' /> Rankings</p>
+                    <p><FontAwesomeIcon icon="fa-solid fa-check" className='icons' /> Value</p>
+                    <p><FontAwesomeIcon icon="fa-solid fa-check" className='icons' /> Tiers</p>
+                    <p><FontAwesomeIcon icon="fa-solid fa-check" className='icons' /> ADP</p>
+                    <p><FontAwesomeIcon icon="fa-solid fa-check" className='icons' /> Scarcity percentages</p>
+                </div>
+                <button onClick={handleExport} className="download-button">Download</button>
+            </div>
+            <div className="spreadsheet-card">
+                <h3 className="download-subheader">Draft cheatsheet + projections</h3>
+                <div className='spreadsheet-features'>
+                    <p><strong>Includes</strong></p>
+                    <p><FontAwesomeIcon icon="fa-solid fa-check" className='icons' /> Everything in draft cheatsheet</p>
+                    <p><FontAwesomeIcon icon="fa-solid fa-check" className='icons' /> Projected fantasy score</p>
+                    <p><FontAwesomeIcon icon="fa-solid fa-check" className='icons' /> Projected passing stats</p>
+                    <p><FontAwesomeIcon icon="fa-solid fa-check" className='icons' /> Projected rushing stats</p>
+                    <p><FontAwesomeIcon icon="fa-solid fa-check" className='icons' /> Projected receiving stats</p>
+                </div>
+                <button onClick={handleExportWithData} className="download-button">Download</button>
+            </div>
         </div>
     </div>
   );
