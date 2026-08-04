@@ -7,7 +7,7 @@
 
 .changelog-table td {
     border: 1px solid #dddddd;
-    padding: 2px;
+    padding: 8px 2px 2px 2px;
     text-align: center;
     position: relative;
 }
@@ -25,4 +25,13 @@
 
 .changelog-table tr {
     background-color: #FFFFFF;
+}
+
+.changelog-table .left-align {
+    text-align: left;
+    padding-left: 16px;
+}
+
+.changelog-table ul {
+    padding-left: 24px;
 }
