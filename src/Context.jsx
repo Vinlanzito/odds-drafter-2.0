@@ -10,7 +10,8 @@ const AppProvider = ({ children }) => {
         interceptionValue: -2,
         receivingYardValue: 0.1,
         rushingYardValue: 0.1,
-        touchdownValue: 6,
+        rushingTouchdownValue: 6,
+        receivingTouchdownValue: 6,
         receptionValue: 1,
         fumbleValue: -2,
         sackValue: 0,
@@ -34,6 +35,9 @@ const AppProvider = ({ children }) => {
     const [adpSetting, setAdpSetting] = useState('consensusPPR');
     const [data, setData] = useState([])
     const [allPlayers, setAllPlayers] = useState([])
+    const [platform, setPlatform] = useState("");
+    const [scoring, setScoring] = useState("");
+    const [size, setSize] = useState("");
 
     useEffect(() => {
         fetch(`${import.meta.env.BASE_URL}players.csv`)
@@ -49,7 +53,7 @@ const AppProvider = ({ children }) => {
     }, []);
 
     return (
-        <AppContext.Provider value={{ pointValues, setPointValues, allPlayers, setAllPlayers, repLevels, setRepLevels, tiers, setTiers, adpSetting, setAdpSetting, data }}>
+        <AppContext.Provider value={{ pointValues, setPointValues, allPlayers, setAllPlayers, repLevels, setRepLevels, tiers, setTiers, adpSetting, setAdpSetting, data, platform, setPlatform, scoring, setScoring, size, setSize }}>
             {children}
         </AppContext.Provider>
     );

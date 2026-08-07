@@ -1,12 +1,14 @@
 #settings-container {
-    margin-bottom: 104px;
+    margin-bottom: 32px;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 8px;
+    flex-direction: column;
 }
 
 #replacement-container {
-    width: 20%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,25 +21,25 @@
 
 .settings-header {
     font-size: 30px;
-    margin-top: 8px;
-    margin-bottom: 16px;
+    margin: 8px 0;
     color: #1C2A44;
 }
 
 #replacement-level-inputs {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    gap: 24px;
+    margin: 8px 0;
+    padding: 0 8px;
 }
 
 .replacement-level-position {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 115px;
-    margin-top: 16px;
-    margin-bottom: 16px;
+    gap: 8px;
 }
 
 .replacement-level-position input {
@@ -85,7 +87,7 @@
 }
 
 #adp-container {
-    width: 20%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,19 +99,21 @@
 }
 
 #adp-form {
-    margin-top: 8px;
+    padding: 0 16px;
+    margin: 8px 0;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px; 
+    justify-content: center;
 }
 
 #adp-form label {
     font-size: 20px;
     font-family: 'Oswald', 'Arial';
-    margin-bottom: 8px;
 }
 
 #tier-container {
-    width: 20%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,17 +125,19 @@
 
 #tier-value-inputs {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    gap: 24px;
+    margin: 8px 0;
+    padding: 0 8px;
 }
 
 .tier-values {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 130px;
-    margin-bottom: 16px;
+    gap: 8px;
 }
 
 .tier-values input {
@@ -149,7 +155,7 @@
 }
 
 #points-container {
-    width: 20%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -162,17 +168,19 @@
 
 #point-value-inputs {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    gap: 24px;
+    margin: 8px 0;
+    padding: 0 8px;
 }
 
 .point-values {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 230px;
-    margin-bottom: 8px;
+    gap: 8px;
 }
 
 .point-values input {
@@ -188,3 +196,47 @@
     font-size: 20px;
     font-family: 'Oswald', 'Arial';
 }
+
+#league-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    min-width: 250px;
+    background-color: #FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
+}
+
+.league-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+#league-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin: 8px 0;
+    padding: 0 8px;
+}
+
+.league-dropdown select {
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 18px;
+    border: solid 2px #000000;
+    font-family: 'Oswald', 'Arial';
+    
+}
+
+.league-dropdown label {
+    font-size: 20px;
+    font-family: 'Oswald', 'Arial';
+}
+

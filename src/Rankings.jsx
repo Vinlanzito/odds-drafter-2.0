@@ -124,6 +124,11 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
   const { pointValues, repLevels, tiers, data, adpSetting } = useContext(AppContext);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
+  //console.log('QB', currentPlayers.slice(0,80).filter((player) => player.position === "QB").length)
+  //console.log('RB', currentPlayers.slice(0,80).filter((player) => player.position === "RB").length)
+  //console.log('WR', currentPlayers.slice(0,80).filter((player) => player.position === "WR").length)
+  //console.log('TE', currentPlayers.slice(0,80).filter((player) => player.position === "TE").length)
+
   useEffect(() => {
     if (data.length === 0) {
       return;
@@ -140,11 +145,10 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
     updateAdp(updatedAllPlayers);
 
     setAllPlayers(updatedAllPlayers);
-    setCurrentPlayers(updatedAllPlayers.map(player => ({...player})));
   }, [data, pointValues, repLevels, tiers, adpSetting]);
 
   useEffect(() => {
-    let updatedCurrentPlayers = currentPlayers.map(player => ({...player}));
+    let updatedCurrentPlayers = currentPlayers.length === 0 ? allPlayers.map(player => ({...player})) : currentPlayers.map(player => ({...player}));
     updatedCurrentPlayers = updatedCurrentPlayers.map(player => allPlayers.find(p => p.name === player.name));
     sortByValue(updatedCurrentPlayers);
     setCurrentPlayers(updatedCurrentPlayers);
@@ -156,7 +160,7 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
     player.fantasyScore = player.passingYards*pointValues.passingYardValue + 
       player.passingTouchdowns*pointValues.passingTouchdownValue + player.interceptions*pointValues.interceptionValue + 
       player.sacks*pointValues.sackValue + player.rushingYards*pointValues.rushingYardValue + player.receivingYards*pointValues.receivingYardValue + 
-      player.rushingTouchdowns*pointValues.touchdownValue + player.receivingTouchdowns*pointValues.touchdownValue + player.receptions*pointValues.receptionValue + player.fumbles*pointValues.fumbleValue
+      player.rushingTouchdowns*pointValues.rushingTouchdownValue + player.receivingTouchdowns*pointValues.receivingTouchdownValue + player.receptions*pointValues.receptionValue + player.fumbles*pointValues.fumbleValue
     );
 
   const sortByPoints = (players) => players.sort((a,b) => b.fantasyScore-a.fantasyScore);
@@ -179,11 +183,11 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
     
 
     for(let i=0; i<repLevels.flexRepLevel; i++) {
-        if(teList[calculatedTeRepLevel].fantasyScore >= wrList[calculatedWrRepLevel].fantasyScore && teList[calculatedTeRepLevel].fantasyScore >= rbList[calculatedRbRepLevel].fantasyScore) {
+        if(calculatedTeRepLevel < teList.length && teList[calculatedTeRepLevel]?.fantasyScore >= wrList[calculatedWrRepLevel]?.fantasyScore && teList[calculatedTeRepLevel]?.fantasyScore >= rbList[calculatedRbRepLevel]?.fantasyScore) {
             calculatedTeRepLevel++;
-        } else if(rbList[calculatedRbRepLevel].fantasyScore >= wrList[calculatedWrRepLevel].fantasyScore && rbList[calculatedRbRepLevel].fantasyScore >= teList[calculatedTeRepLevel].fantasyScore) {
+        } else if(calculatedRbRepLevel < rbList.length && rbList[calculatedRbRepLevel]?.fantasyScore >= wrList[calculatedWrRepLevel]?.fantasyScore && rbList[calculatedRbRepLevel]?.fantasyScore >= teList[calculatedTeRepLevel]?.fantasyScore) {
             calculatedRbRepLevel++;
-        } else {
+        } else if(calculatedWrRepLevel < wrList.length) {
             calculatedWrRepLevel++;
         }
     }
