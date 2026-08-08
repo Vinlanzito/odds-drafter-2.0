@@ -13,12 +13,13 @@ function RankingsBody({ currentBody }) {
     wrScarcity: 100,
     teScarcity: 100
   });
+  const [sortBy, setSortBy] = useState("value");
 
   return (
     <div className={`${currentBody === 'rankings' ? "" : "hide"}`}>
       <ScarcityCounts scarcity={scarcity} />
-      <TableFilters allPlayers={allPlayers} setAllPlayers={setAllPlayers} currentPlayers={currentPlayers} setCurrentPlayers={setCurrentPlayers} hideDraftedPlayers={hideDraftedPlayers} setHideDraftedPlayers={setHideDraftedPlayers} currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} />
-      <RankingsTable allPlayers={allPlayers} setAllPlayers={setAllPlayers} currentPlayers={currentPlayers} setCurrentPlayers={setCurrentPlayers} hideDraftedPlayers={hideDraftedPlayers} currentFilter={currentFilter} setScarcity={setScarcity} />
+      <TableFilters allPlayers={allPlayers} setAllPlayers={setAllPlayers} currentPlayers={currentPlayers} setCurrentPlayers={setCurrentPlayers} hideDraftedPlayers={hideDraftedPlayers} setHideDraftedPlayers={setHideDraftedPlayers} currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} scarcity={scarcity} sortBy={sortBy} setSortBy={setSortBy} />
+      <RankingsTable allPlayers={allPlayers} setAllPlayers={setAllPlayers} currentPlayers={currentPlayers} setCurrentPlayers={setCurrentPlayers} hideDraftedPlayers={hideDraftedPlayers} currentFilter={currentFilter} setScarcity={setScarcity} scarcity={scarcity} sortBy={sortBy} setSortBy={setSortBy} />
     </div>
   );
 }
@@ -68,7 +69,7 @@ function ScarcityCounts({scarcity}) {
   )
 }
 
-function TableFilters({allPlayers, setAllPlayers, currentPlayers, setCurrentPlayers, hideDraftedPlayers, setHideDraftedPlayers, currentFilter, setCurrentFilter}) {
+function TableFilters({allPlayers, setAllPlayers, currentPlayers, setCurrentPlayers, hideDraftedPlayers, setHideDraftedPlayers, currentFilter, setCurrentFilter, scarcity, sortBy, setSortBy}) {
   const [draftMode, setDraftMode] = useState(false);
 
   useEffect(() => {
@@ -89,14 +90,74 @@ function TableFilters({allPlayers, setAllPlayers, currentPlayers, setCurrentPlay
 
   const positionClick = (position) => {
     setCurrentFilter(position);
+    let updatedCurrentPlayers;
     if (position === 'topTen') {
-      setCurrentPlayers(allPlayers.filter((player) => !player.drafted).slice(0, 10));
+      updatedCurrentPlayers = allPlayers.filter((player) => !player.drafted).slice(0, 10);
+      sort(updatedCurrentPlayers);
+      setCurrentPlayers(updatedCurrentPlayers);
+      return;
+    }
+    if (position === 'suggested') {
+      setSuggested();
       return;
     }
 
-    setCurrentPlayers(allPlayers.filter((player) => position === "all" || position.toUpperCase() === player.position));
+    updatedCurrentPlayers = allPlayers.filter((player) => position === "all" || position.toUpperCase() === player.position);
+    sort(updatedCurrentPlayers);
+    setCurrentPlayers(updatedCurrentPlayers);
   };
 
+  const setSuggested = () => {
+    let undraftedPlayers = allPlayers.filter((player) => !player.drafted)
+    const valueBaseline = undraftedPlayers[0].value - 1;
+    let suggestedPlayers = undraftedPlayers.filter((player) => player.value >= valueBaseline);
+    let adpBaseline = 1000;
+    suggestedPlayers.forEach((player) => adpBaseline = player.adp < adpBaseline ? player.adp : adpBaseline);
+    const adpRange = 5*Math.log(adpBaseline)
+    adpBaseline = adpBaseline + adpRange;
+
+    suggestedPlayers.forEach(player => {
+      const valueScore = (player.value - valueBaseline) * 40;
+      let scarcityScore;
+      switch (player.position) {
+        case "QB":
+          scarcityScore = (100 - scarcity.qbScarcity) / 100 * 45;
+          break;
+        case "RB":
+          scarcityScore = (100 - scarcity.rbScarcity) / 100 * 45;
+            break;
+        case "WR":
+          scarcityScore = (100 - scarcity.wrScarcity) / 100 * 45;
+            break;
+        case "TE":
+          scarcityScore = (100 - scarcity.teScarcity) / 100 * 45;
+            break;
+      }
+      const adpScore = (adpBaseline - player.adp) / adpRange * 15;
+      console.log(player.name, valueScore, scarcityScore)
+
+      player.draftScore = valueScore + scarcityScore + adpScore;
+    });
+
+    setSortBy("draftScore");
+    suggestedPlayers.sort((a,b) => b.draftScore-a.draftScore);
+    setCurrentPlayers(suggestedPlayers);
+  }
+
+  const sort = (players) => {
+    switch (sortBy) {
+        case "value":
+          players.sort((a,b) => b.value-a.value);
+          break;
+        case "adp":
+          players.sort((a,b) => a.adp-b.adp);
+          break;
+        case "draftScore":
+          setSortBy("value");
+          players.sort((a,b) => b.value-a.value);
+          break;
+    }
+  }
 
   return (
     <div id="table-filters">
@@ -106,6 +167,7 @@ function TableFilters({allPlayers, setAllPlayers, currentPlayers, setCurrentPlay
         <button onClick={() => positionClick('wr')} className={currentFilter === 'wr' ? "current-position" : ""}>WR</button>
         <button onClick={() => positionClick('te')} className={currentFilter === 'te' ? "current-position" : ""}>TE</button>
         <button onClick={() => positionClick('topTen')} className={currentFilter === 'topTen' ? "current-position" : ""}>Top 10</button>
+        <button onClick={() => positionClick('suggested')} className={currentFilter === 'suggested' ? "current-position" : ""}>Suggested</button>
         <label className="switch">
           <input id="toggle-drafted" type="checkbox" checked={hideDraftedPlayers} onChange={() => setHideDraftedPlayers(!hideDraftedPlayers)} />
           <span className="slider"></span>
@@ -120,7 +182,7 @@ function TableFilters({allPlayers, setAllPlayers, currentPlayers, setCurrentPlay
   );
 }
 
-function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPlayers, hideDraftedPlayers, currentFilter, setScarcity}) {
+function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPlayers, hideDraftedPlayers, currentFilter, setScarcity, scarcity, sortBy, setSortBy}) {
   const { pointValues, repLevels, tiers, data, adpSetting } = useContext(AppContext);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
@@ -150,7 +212,17 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
   useEffect(() => {
     let updatedCurrentPlayers = currentPlayers.length === 0 ? allPlayers.map(player => ({...player})) : currentPlayers.map(player => ({...player}));
     updatedCurrentPlayers = updatedCurrentPlayers.map(player => allPlayers.find(p => p.name === player.name));
-    sortByValue(updatedCurrentPlayers);
+    switch (sortBy) {
+        case "value":
+          sortByValue(updatedCurrentPlayers);
+          break;
+        case "adp":
+          sortByADP(updatedCurrentPlayers);
+          break;
+        case "draftScore":
+          sortByDraftScore(updatedCurrentPlayers);
+          break;
+      }
     setCurrentPlayers(updatedCurrentPlayers);
   }, [allPlayers]); 
 
@@ -204,7 +276,10 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
     }
   };
 
-  const sortByValue = (players) => players.sort((a,b) => b.value-a.value || a.rank-b.rank);
+  const sortByValue = (players) => {
+    setSortBy("value");
+    return players.sort((a,b) => b.value-a.value || a.rank-b.rank)
+  };
 
   const updateTiers = (players) => players.forEach((player) => {
     if (player.value >= tiers.tier1) {
@@ -360,7 +435,10 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
     return `rgb(${redValue},${greenValue},${blueValue})`;
   }
 
-  const sortByADP = (players) => players.sort((a,b) => a.adp-b.adp);
+  const sortByADP = (players) => {
+    setSortBy("adp");
+    return players.sort((a,b) => a.adp-b.adp)
+  };
 
   const sortByScarcity = (players) => players.sort((a,b) => b.scarcity.replace("%" ,"")-a.scarcity.replace("%" ,""));
 
@@ -369,12 +447,15 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
   const handleDraft = () => {
     let updatedAllPlayers = [...allPlayers];
     updatedAllPlayers = updatedAllPlayers.map(player => selectedPlayer?.name === player.name ? {...player, drafted: !player.drafted} : player);
-    updateRemValue();
-    setSelectedPlayer(null)
+    let updatedScarcity = updateRemValue();
+    setSelectedPlayer(null);
     setAllPlayers(updatedAllPlayers);
     if (currentFilter === "topTen") {
-      setCurrentPlayers(updatedAllPlayers.filter((player) => !player.drafted).slice(0, 10))
-    };
+      setCurrentPlayers(updatedAllPlayers.filter((player) => !player.drafted).slice(0, 10));
+    }
+    if (currentFilter === "suggested") {
+      setSuggested(updatedAllPlayers, updatedScarcity);
+    }
   };
 
   const updateRemValue = () => {
@@ -384,24 +465,74 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
     }
     const position = draftPlayer.position;
     const value = draftPlayer.drafted ? draftPlayer.value : -draftPlayer.value;
+    let updatedScarcity;
 
     switch (position) {
         case "QB":
-          setScarcity(prev => ({...prev, qbRemValue: prev.qbRemValue + value, qbScarcity: Math.round((prev.qbRemValue + value)/prev.qbTotalValue*100)}));
+          updatedScarcity = ({...scarcity, qbRemValue: scarcity.qbRemValue + value, qbScarcity: Math.round((scarcity.qbRemValue + value)/scarcity.qbTotalValue*100)});
+          //setScarcity(prev => ({...prev, qbRemValue: prev.qbRemValue + value, qbScarcity: Math.round((prev.qbRemValue + value)/prev.qbTotalValue*100)}));
           break;
         case "RB":
-          setScarcity(prev => ({...prev, rbRemValue: prev.rbRemValue + value, rbScarcity: Math.round((prev.rbRemValue + value)/prev.rbTotalValue*100)}));
+          updatedScarcity = ({...scarcity, rbRemValue: scarcity.rbRemValue + value, rbScarcity: Math.round((scarcity.rbRemValue + value)/scarcity.rbTotalValue*100)});
+          //setScarcity(prev => ({...prev, rbRemValue: prev.rbRemValue + value, rbScarcity: Math.round((prev.rbRemValue + value)/prev.rbTotalValue*100)}));
             break;
         case "WR":
-          setScarcity(prev => ({...prev, wrRemValue: prev.wrRemValue + value, wrScarcity: Math.round((prev.wrRemValue + value)/prev.wrTotalValue*100)}));
+          updatedScarcity = ({...scarcity, wrRemValue: scarcity.wrRemValue + value, wrScarcity: Math.round((scarcity.wrRemValue + value)/scarcity.wrTotalValue*100)});
+          //setScarcity(prev => ({...prev, wrRemValue: prev.wrRemValue + value, wrScarcity: Math.round((prev.wrRemValue + value)/prev.wrTotalValue*100)}));
             break;
         case "TE":
-          setScarcity(prev => ({...prev, teRemValue: prev.teRemValue + value, teScarcity: Math.round((prev.teRemValue + value)/prev.teTotalValue*100)}));
+          updatedScarcity = ({...scarcity, teRemValue: scarcity.teRemValue + value, teScarcity: Math.round((scarcity.teRemValue + value)/scarcity.teTotalValue*100)});
+          //setScarcity(prev => ({...prev, teRemValue: prev.teRemValue + value, teScarcity: Math.round((prev.teRemValue + value)/prev.teTotalValue*100)}));
             break;
     }
+
+    setScarcity(updatedScarcity);
+
+    return updatedScarcity;
   }
 
   const updateAdp = (players) => players.forEach(player => player.adp = player[adpSetting]);
+
+  const setSuggested = (updatedAllPlayers, updatedScarcity) => {
+    let undraftedPlayers = updatedAllPlayers.filter((player) => !player.drafted);
+    const valueBaseline = undraftedPlayers[0].value - 1;
+    let suggestedPlayers = undraftedPlayers.filter((player) => player.value >= valueBaseline);
+      let adpBaseline = 1000;
+    suggestedPlayers.forEach((player) => adpBaseline = player.adp < adpBaseline ? player.adp : adpBaseline);
+    const adpRange = 5*Math.log(adpBaseline)
+    adpBaseline = adpBaseline + adpRange;
+
+    suggestedPlayers.forEach(player => {
+      const valueScore = (player.value - valueBaseline) * 40;
+      let scarcityScore;
+      switch (player.position) {
+        case "QB":
+          scarcityScore = (100 - updatedScarcity.qbScarcity) / 100 * 45;
+          break;
+        case "RB":
+          scarcityScore = (100 - updatedScarcity.rbScarcity) / 100 * 45;
+            break;
+        case "WR":
+          scarcityScore = (100 - updatedScarcity.wrScarcity) / 100 * 45;
+            break;
+        case "TE":
+          scarcityScore = (100 - updatedScarcity.teScarcity) / 100 * 45;
+            break;
+      }
+      const adpScore = (adpBaseline - player.adp) / adpRange * 15;
+      console.log(player.name, valueScore, scarcityScore)
+
+      player.draftScore = valueScore + scarcityScore + adpScore;
+    });
+    
+    setSortBy("draftScore");
+    setCurrentPlayers(suggestedPlayers);
+  }
+
+  const sortByDraftScore = (players) => {
+    setSortBy("draftScore");
+    return players.sort((a,b) => b.draftScore-a.draftScore);
+  };
   
   return (
     <div>
@@ -414,6 +545,7 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
                 <th>Tier</th>
                 <th onClick={()=>setCurrentPlayers(sortByADP([...currentPlayers]))} className="sortable-header right-align">ADP</th>
                 <th className="right-align">Bye</th>
+                {currentFilter === "suggested" && <th className="right-align">Draft Score</th>}
             </tr>
         </thead>
         <tbody>
@@ -428,6 +560,7 @@ function RankingsTable({allPlayers, setAllPlayers, currentPlayers, setCurrentPla
             <td><span className={`tier${player.tier}`}>{player.tier}</span></td>
             <td className="right-align">{player.adp}</td>
             <td className="right-align">{player.bye}</td>
+            {currentFilter === "suggested" && <td className="right-align">{player.draftScore.toFixed(0)}</td>}
           </tr>))}
         </tbody>
       </table>
